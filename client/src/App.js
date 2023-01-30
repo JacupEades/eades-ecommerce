@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Header from "./components/nav/Header";
+import SideDrawer from "./components/drawer/SideDrawer";
 import RegisterComplete from "./pages/auth/RegisterComplete";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import UserRoute from "./components/routes/UserRoute";
@@ -27,6 +28,7 @@ import Product from "./pages/Product";
 import CategoryHome from "./pages/category/CategoryHome";
 import SubHome from "./pages/sub/SubHome";
 import Shop from "./pages/Shop";
+import Cart from "./pages/Cart";
 
 import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
@@ -65,6 +67,7 @@ const App = () => {
 	return (
 		<>
 			<Header />
+			<SideDrawer />
 			<ToastContainer />
 			<Switch>
 				<Route exact path="/" component={Home} />
@@ -76,6 +79,7 @@ const App = () => {
 				<Route exact path="/category/:slug" component={CategoryHome} />
 				<Route exact path="/sub/:slug" component={SubHome} />
 				<Route exact path="/shop" component={Shop} />
+				<Route exact path="/cart" component={Cart} />
 				<UserRoute exact path="/user/history" component={History} />
 				<UserRoute exact path="/user/password" component={Password} />
 				<UserRoute exact path="/user/wishlist" component={Wishlist} />

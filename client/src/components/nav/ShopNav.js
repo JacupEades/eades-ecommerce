@@ -108,14 +108,7 @@ const ShopNav = ({
 		),
 	];
 
-	return (
-		<Menu
-			defaultSelectedKeys={["shippingSelect"]}
-			defaultOpenKeys={["shippingSelect"]}
-			mode="inline"
-			items={items}
-		/>
-	);
+	return <Menu mode="inline" items={items} />;
 };
 
 export default ShopNav;

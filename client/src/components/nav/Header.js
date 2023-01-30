@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Menu } from "antd";
+import { Menu, Badge } from "antd";
 import {
 	AppstoreOutlined,
 	SettingOutlined,
@@ -7,17 +7,19 @@ import {
 	UserAddOutlined,
 	LogoutOutlined,
 	ShoppingOutlined,
+	ShoppingCartOutlined,
 } from "@ant-design/icons";
 import { Link, useHistory } from "react-router-dom";
 import firebase from "firebase/compat/app";
 import { useDispatch, useSelector } from "react-redux";
 import Search from "../forms/Search";
+import Username from "./Username";
 
 const Header = () => {
 	const [current, setCurrent] = useState("home");
 
 	let dispatch = useDispatch();
-	let { user } = useSelector((state) => ({ ...state }));
+	let { user, cart } = useSelector((state) => ({ ...state }));
 
 	let history = useHistory();
 
@@ -37,16 +39,36 @@ const Header = () => {
 
 	const noUserItems = [
 		{
-			label: <Link to="..">Home</Link>,
-			key: "home",
-			icon: <AppstoreOutlined />,
+			type: "group",
+			children: [
+				{
+					label: <Link to="..">Home</Link>,
+					key: "home",
+					icon: <AppstoreOutlined />,
+				},
+				{
+					label: <Link to="/shop">Shop</Link>,
+					key: "shop",
+					icon: <ShoppingOutlined />,
+				},
+				{
+					label: (
+						<Link to="/cart">
+							<Badge count={cart.length} offset={[9, 0]}>
+								Cart
+							</Badge>
+						</Link>
+					),
+					key: "cart",
+					icon: <ShoppingCartOutlined />,
+				},
+			],
 		},
-		{
-			label: <Search />,
-		},
+
 		{
 			type: "group",
 			children: [
+				{ label: <Search />, key: "search" },
 				{
 					label: <Link to="/register">Register</Link>,
 					key: "register",
@@ -63,28 +85,55 @@ const Header = () => {
 
 	const subscriberUserItems = [
 		{
-			label: <Link to="..">Home</Link>,
-			key: "home",
-			icon: <AppstoreOutlined />,
-		},
-		{
-			label: <Search />,
-		},
-		{
-			label: "Account",
-			key: "SubMenu",
-			icon: <UserOutlined />,
+			type: "group",
 			children: [
 				{
-					label: <Link to="/user/history">Settings</Link>,
-					key: "adminDB",
-					icon: <SettingOutlined />,
+					label: <Link to="..">Home</Link>,
+					key: "home",
+					icon: <AppstoreOutlined />,
 				},
 				{
-					label: <Link to="/register">Logout</Link>,
-					key: "logout",
-					icon: <LogoutOutlined />,
-					onClick: logout,
+					label: <Link to="/shop">Shop</Link>,
+					key: "shop",
+					icon: <ShoppingOutlined />,
+				},
+				{
+					label: (
+						<Link to="/cart">
+							<Badge count={cart.length} offset={[9, 0]}>
+								Cart
+							</Badge>
+						</Link>
+					),
+					key: "cart",
+					icon: <ShoppingCartOutlined />,
+				},
+			],
+		},
+
+		{
+			type: "group",
+			children: [
+				{
+					label: <Search />,
+				},
+				{
+					label: <Username />,
+					key: "SubMenu",
+					icon: <UserOutlined />,
+					children: [
+						{
+							label: <Link to="/user/history">Settings</Link>,
+							key: "userDB",
+							icon: <SettingOutlined />,
+						},
+						{
+							label: <Link to="/register">Logout</Link>,
+							key: "logout",
+							icon: <LogoutOutlined />,
+							onClick: logout,
+						},
+					],
 				},
 			],
 		},
@@ -92,33 +141,55 @@ const Header = () => {
 
 	const adminUserItems = [
 		{
-			label: <Link to="..">Home</Link>,
-			key: "home",
-			icon: <AppstoreOutlined />,
-		},
-		{
-			label: <Link to="/shop">Shop</Link>,
-			key: "shop",
-			icon: <ShoppingOutlined />,
-		},
-		{
-			label: <Search />,
-		},
-		{
-			label: "Admin Account",
-			key: "SubMenu",
-			icon: <UserOutlined />,
+			type: "group",
 			children: [
 				{
-					label: <Link to="/admin/dashboard">Dashboard</Link>,
-					key: "adminDB",
-					icon: <SettingOutlined />,
+					label: <Link to="..">Home</Link>,
+					key: "home",
+					icon: <AppstoreOutlined />,
 				},
 				{
-					label: <Link to="/register">Logout</Link>,
-					key: "logout",
-					icon: <LogoutOutlined />,
-					onClick: logout,
+					label: <Link to="/shop">Shop</Link>,
+					key: "shop",
+					icon: <ShoppingOutlined />,
+				},
+				{
+					label: (
+						<Link to="/cart">
+							<Badge count={cart.length} offset={[9, 0]}>
+								Cart
+							</Badge>
+						</Link>
+					),
+					key: "cart",
+					icon: <ShoppingCartOutlined />,
+				},
+			],
+		},
+
+		{
+			type: "group",
+			children: [
+				{
+					label: <Search />,
+				},
+				{
+					label: <Username />,
+					key: "SubMenu",
+					icon: <UserOutlined />,
+					children: [
+						{
+							label: <Link to="/admin/dashboard">Dashboard</Link>,
+							key: "adminDB",
+							icon: <SettingOutlined />,
+						},
+						{
+							label: <Link to="/register">Logout</Link>,
+							key: "logout",
+							icon: <LogoutOutlined />,
+							onClick: logout,
+						},
+					],
 				},
 			],
 		},

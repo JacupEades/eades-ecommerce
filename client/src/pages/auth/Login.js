@@ -10,8 +10,8 @@ import { Link } from "react-router-dom";
 import { createUpdateUser } from "../../functions/auth";
 
 const Login = ({ history }) => {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+	const [email, setEmail] = useState("jwae98@gmail.com");
+	const [password, setPassword] = useState("123456");
 	const [loading, setLoading] = useState(false);
 
 	const { user } = useSelector((state) => ({ ...state }));
@@ -24,13 +24,13 @@ const Login = ({ history }) => {
 		} else {
 			if (user && user.token) history.push("/");
 		}
-	}, [history, user]);
+	}, [user, history]);
 
-	const roleBasedRedirect = (res) => {
+	const roleBasedRedirect = async (res) => {
 		// check if intended
-		let intended = history.location.state;
+		let intended = await history.location.state;
 		if (intended) {
-			history.push(intended.from);
+			return history.push(intended.from);
 		} else {
 			if (res.data.role === "admin") {
 				history.push("/admin/dashboard");

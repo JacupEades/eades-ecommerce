@@ -25,17 +25,17 @@ const Search = () => {
 	return (
 		<form className="my-2 my-lg-2" onSubmit={handleSubmit}>
 			<div className="row">
+				<SearchOutlined
+					onClick={handleSubmit}
+					style={{ cursor: "pointer" }}
+					className="col-sm-2 d-flex align-items-center"
+				/>
 				<input
 					onChange={handleChange}
 					type="search"
 					value={text}
 					className="form-control col"
 					placeholder="search"
-				/>
-				<SearchOutlined
-					onClick={handleSubmit}
-					style={{ cursor: "pointer" }}
-					className="col-sm-2 d-flex align-items-center"
 				/>
 			</div>
 		</form>

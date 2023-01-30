@@ -3,6 +3,10 @@
    object-fit: cover;
 }
 
+.pointer {
+   cursor: pointer;
+}
+
 /* Shop Nav CSS */
 .ant-menu-submenu li {
    padding-left: 16px !important;
