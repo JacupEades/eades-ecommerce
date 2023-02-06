@@ -13,7 +13,6 @@ const Product = ({ match }) => {
 
 	// redux
 	const { user } = useSelector((state) => ({ ...state }));
-
 	const { slug } = match.params;
 
 	useEffect(() => {

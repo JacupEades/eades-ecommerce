@@ -29,6 +29,7 @@ import CategoryHome from "./pages/category/CategoryHome";
 import SubHome from "./pages/sub/SubHome";
 import Shop from "./pages/Shop";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 
 import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
@@ -80,6 +81,7 @@ const App = () => {
 				<Route exact path="/sub/:slug" component={SubHome} />
 				<Route exact path="/shop" component={Shop} />
 				<Route exact path="/cart" component={Cart} />
+				<UserRoute exact path="/checkout" component={Checkout} />
 				<UserRoute exact path="/user/history" component={History} />
 				<UserRoute exact path="/user/password" component={Password} />
 				<UserRoute exact path="/user/wishlist" component={Wishlist} />

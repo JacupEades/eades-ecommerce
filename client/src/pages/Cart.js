@@ -2,10 +2,11 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import ProductCardInCheckout from "../components/cards/ProductCardInCheckout";
+import { userCart } from "../functions/user";
 
-const Cart = () => {
-	const { user, cart } = useSelector((state) => ({ ...state }));
+const Cart = ({ history }) => {
 	const dispatch = useDispatch();
+	const { user, cart } = useSelector((state) => ({ ...state }));
 
 	const getTotal = () => {
 		return cart.reduce((currentValue, nextValue) => {
@@ -13,7 +14,17 @@ const Cart = () => {
 		}, 0);
 	};
 
-	const saveOrderToDB = () => {};
+	const saveOrderToDb = () => {
+		// console.log("cart", JSON.stringify(cart, null, 4));
+		userCart(cart, user.token)
+			.then((res) => {
+				console.log("CART POST RES", res);
+				if (res.data.ok) {
+					history.push("/checkout");
+				}
+			})
+			.catch((err) => console.log("cart save err", err));
+	};
 
 	const showCartItems = () => (
 		<div className="table-responsive">
@@ -72,7 +83,7 @@ const Cart = () => {
 							</Link>
 						) : user ? (
 							<button
-								onClick={saveOrderToDB()}
+								onClick={saveOrderToDb}
 								className="btn btn-sm btn-primary mt-2"
 								disabled={!cart.length}>
 								Proceed to Checkout

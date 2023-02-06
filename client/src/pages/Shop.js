@@ -67,6 +67,9 @@ const Shop = () => {
 		// console.log("load products on user search input", text);
 		const delayed = setTimeout(() => {
 			fetchProducts({ query: text });
+			if (!text) {
+				loadAllProducts();
+			}
 		}, 300);
 		return () => clearTimeout(delayed);
 	}, [text]);
@@ -74,8 +77,11 @@ const Shop = () => {
 	// 3. load products based on price range
 	useEffect(() => {
 		console.log("ok to request");
-		fetchProducts({ price });
-	}, [ok]);
+		const delayed = setTimeout(() => {
+			fetchProducts({ price });
+		}, 300);
+		return () => clearTimeout(delayed);
+	}, [ok, price]);
 
 	const handleSlider = (value) => {
 		dispatch({
