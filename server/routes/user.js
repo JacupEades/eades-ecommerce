@@ -10,9 +10,10 @@ const {
 	getUserCart,
 	emptyUserCart,
 	saveAddress,
+	applyCouponToUserCart,
 } = require("../controllers/user");
 
-// svae cart
+// save cart
 router.post("/user/cart", authCheck, userCart);
 // get cart
 router.get("/user/cart", authCheck, getUserCart);
@@ -20,6 +21,9 @@ router.get("/user/cart", authCheck, getUserCart);
 router.delete("/user/cart", authCheck, emptyUserCart);
 // save user address
 router.post("/user/address", authCheck, saveAddress);
+
+// coupon
+router.post("/user/cart/coupon", authCheck, applyCouponToUserCart);
 
 // router.get("/user", (req, res) => {
 // 	res.json({

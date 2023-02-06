@@ -47,7 +47,7 @@ const SubUpdate = ({ match, history }) => {
 	};
 
 	return (
-		<div className="constainer-fluid">
+		<div className="container-fluid">
 			<div className="row">
 				<div className="col-md-2">
 					<AdminNav />

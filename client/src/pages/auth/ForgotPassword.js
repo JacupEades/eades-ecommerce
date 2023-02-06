@@ -38,7 +38,7 @@ const ForgotPassword = ({ history }) => {
 	};
 
 	return (
-		<div className="constainer col-md-6 offset-md-3 p-5">
+		<div className="container col-md-6 offset-md-3 p-5">
 			{loading ? (
 				<h4 className="text-danger">Loading</h4>
 			) : (
