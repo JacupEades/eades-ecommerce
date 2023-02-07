@@ -7,6 +7,11 @@
    cursor: pointer;
 }
 
+.inactiveLink {
+   pointer-events: none;
+   cursor: not-allowed;
+}
+
 /* Shop Nav CSS */
 .ant-menu-submenu li {
    padding-left: 16px !important;

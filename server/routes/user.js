@@ -11,6 +11,7 @@ const {
 	emptyUserCart,
 	saveAddress,
 	applyCouponToUserCart,
+	createOrder,
 } = require("../controllers/user");
 
 // save cart
@@ -21,6 +22,9 @@ router.get("/user/cart", authCheck, getUserCart);
 router.delete("/user/cart", authCheck, emptyUserCart);
 // save user address
 router.post("/user/address", authCheck, saveAddress);
+
+// create order after payment
+router.post("/user/order", authCheck, createOrder);
 
 // coupon
 router.post("/user/cart/coupon", authCheck, applyCouponToUserCart);
