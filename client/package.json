@@ -8,6 +8,8 @@
     "@fortawesome/fontawesome-free": "^6.2.1",
     "@jridgewell/sourcemap-codec": "^1.4.14",
     "@rollup/plugin-terser": "^0.2.0",
+    "@stripe/react-stripe-js": "^1.16.4",
+    "@stripe/stripe-js": "^1.46.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
