@@ -40,6 +40,11 @@ const AdminNav = () => {
 						PASSWORD
 					</Link>
 				</li>
+				<li className="nav-item">
+					<Link to="/user/history" className="nav-link">
+						USER NAV OPTIONS
+					</Link>
+				</li>
 			</ul>
 		</nav>
 	);

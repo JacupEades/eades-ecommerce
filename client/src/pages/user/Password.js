@@ -53,7 +53,7 @@ const Password = () => {
 				<div className="col-md-2">
 					<UserNav />
 				</div>
-				<div className="col">
+				<div className="col-md-8 mt-2">
 					{loading ? (
 						<h4 className="danger">Loading...</h4>
 					) : (
