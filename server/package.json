@@ -23,7 +23,9 @@
     "nodemon": "^2.0.4",
     "slugify": "^1.6.5",
     "stripe": "^8.222.0",
-    "uniqid": "^5.4.0",
     "uniquid": "^1.1.4"
+  },
+  "devDependencies": {
+    "uniqueid": "^1.0.0"
   }
 }

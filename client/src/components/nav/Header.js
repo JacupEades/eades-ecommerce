@@ -8,6 +8,7 @@ import {
 	LogoutOutlined,
 	ShoppingOutlined,
 	ShoppingCartOutlined,
+	DashboardOutlined,
 } from "@ant-design/icons";
 import { Link, useHistory } from "react-router-dom";
 import firebase from "firebase/compat/app";
@@ -181,6 +182,11 @@ const Header = () => {
 						{
 							label: <Link to="/admin/dashboard">Dashboard</Link>,
 							key: "adminDB",
+							icon: <DashboardOutlined />,
+						},
+						{
+							label: <Link to="/user/history">Admin Settings</Link>,
+							key: "adminSettings",
 							icon: <SettingOutlined />,
 						},
 						{

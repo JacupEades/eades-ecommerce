@@ -3,7 +3,7 @@ const Product = require("../models/product");
 const Cart = require("../models/cart");
 const Coupon = require("../models/coupon");
 const Order = require("../models/order");
-const uniqid = require("uniqid");
+const uniqueid = require("uniqueid");
 
 exports.userCart = async (req, res) => {
 	//console.log(req.body) // {cart: []}
@@ -208,12 +208,14 @@ exports.createCashOrder = async (req, res) => {
 	let newOrder = await new Order({
 		products: userCart.products,
 		paymentIntent: {
-			id: uniqid(),
-			amount: finalAmount,
-			currency: "usd",
-			status: "Cash On Delivery",
-			created: Date.now(),
-			payment_method_types: ["cash"],
+			paymentIntent: {
+				id: uniqueid(),
+				amount: finalAmount,
+				currency: "usd",
+				status: "Cash On Delivery",
+				created: Date.now(),
+				payment_method_types: ["cash"],
+			},
 		},
 		orderedBy: user._id,
 		orderStatus: "Cash On Delivery",
