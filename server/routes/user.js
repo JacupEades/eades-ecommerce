@@ -16,6 +16,7 @@ const {
 	addToWishlist,
 	wishlist,
 	removeFromWishlist,
+	createCashOrder,
 } = require("../controllers/user");
 
 // save cart
@@ -28,7 +29,10 @@ router.delete("/user/cart", authCheck, emptyUserCart);
 router.post("/user/address", authCheck, saveAddress);
 
 // create order after payment
+// Stripe
 router.post("/user/order", authCheck, createOrder);
+// Cash on delivery
+router.post("/user/cash-order", authCheck, createCashOrder);
 router.get("/user/orders", authCheck, orders);
 
 // coupon

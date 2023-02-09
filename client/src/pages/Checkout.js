@@ -6,6 +6,7 @@ import {
 	getUserCart,
 	saveUserAddress,
 	applyCoupon,
+	createCashOrderForUser,
 } from "../functions/user";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -21,7 +22,8 @@ const Checkout = ({ history }) => {
 	const [discountError, setDiscountError] = useState("");
 
 	const dispatch = useDispatch();
-	const { user } = useSelector((state) => ({ ...state }));
+	const { user, COD } = useSelector((state) => ({ ...state }));
+	const couponTrueOrFalse = useSelector((state) => state.coupon);
 
 	useEffect(() => {
 		getUserCart(user.token).then((res) => {
@@ -123,6 +125,38 @@ const Checkout = ({ history }) => {
 		</>
 	);
 
+	const createCashOrder = () => {
+		createCashOrderForUser(user.token, COD, couponTrueOrFalse).then((res) => {
+			console.log("USER CASH ORDER RES", res);
+
+			if (res.data.ok) {
+				// empty local storage
+				if (typeof window !== "undefined") localStorage.removeItem("cart");
+				// empty redux cart
+				dispatch({
+					type: "ADD_TO_CART",
+					payload: [],
+				});
+				// empty redux coupon
+				dispatch({
+					type: "COUPON_APPLIED",
+					payload: false,
+				});
+				// empty redux COD
+				dispatch({
+					type: "COD",
+					payload: false,
+				});
+				// empty cart from backend
+				emptyUserCart(user.token);
+				// redirect
+				setTimeout(() => {
+					history.push("/user/history");
+				}, 1000);
+			}
+		});
+	};
+
 	return (
 		<div className="container-fluid">
 			<div className="row mt-2">
@@ -162,12 +196,21 @@ const Checkout = ({ history }) => {
 
 					<div className="row">
 						<div className="col-md-6">
-							<button
-								className="btn btn-primary"
-								disabled={!addressSaved || !products.length}
-								onClick={() => history.push("/payment")}>
-								Place Order
-							</button>
+							{COD ? (
+								<button
+									className="btn btn-primary"
+									disabled={!addressSaved || !products.length}
+									onClick={createCashOrder}>
+									Place Order
+								</button>
+							) : (
+								<button
+									className="btn btn-primary"
+									disabled={!addressSaved || !products.length}
+									onClick={() => history.push("/payment")}>
+									Place Order
+								</button>
+							)}
 						</div>
 						<div className="col-md-6">
 							<button
